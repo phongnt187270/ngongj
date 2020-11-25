@@ -4,7 +4,7 @@ package UnitTest;
 import java.io.*;
 import java.net.URL;
 public class JsonReader {
-
+    public JsonReader(){}
     public static String readJsonFromUrl(URL url) throws Exception {
         BufferedReader reader = null;
         try {

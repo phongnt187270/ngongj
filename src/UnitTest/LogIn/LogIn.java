@@ -1,22 +1,38 @@
 package UnitTest.LogIn;
 
-import UnitTest.JsonReader;
+import UnitTest.Constant;
+import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogIn {
-    public void Test() throws Exception {
+    public static void main(String[] args) throws Exception {
+        URL url = new URL(Constant.LOG_IN);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        Map<String, String> map = new HashMap<>();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
         try {
-            URL url = new URL("");
-            String input = JsonReader.readJsonFromUrl(url);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Accept", "application/json");
-            LoginResp result = new LoginResp(input);
+            StringBuilder content;
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                content = new StringBuilder();
+                while ((line = in.readLine()) != null) {
+                    content.append(line);
+                    content.append(System.lineSeparator());
+                }
+            }
+            Gson g = new Gson();
+            LoginResp rp = g.fromJson(content.toString(), LoginResp.class);
+            System.out.println(map.get(rp.code));
         }
-        catch (Exception e){
-            e.printStackTrace();
+        finally {
+            connection.disconnect();
         }
     }
 }
