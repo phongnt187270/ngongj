@@ -1,6 +1,7 @@
-package UnitTest.LogIn;
+package UnitTest.GetNotification;
 
 import UnitTest.Constant;
+import UnitTest.SetReadNotification.SetReadNotificationResp;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -9,12 +10,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LogIn {
-    public static void main(String[] args) throws Exception {
+public class GetNotification {
+    public static void main(String[] args) {
 
     }
-    public static LoginResp getInfoFromServer(String phonenumber, String password) throws IOException {
-        URL url = new URL(Constant.LOG_IN + "?phonenumber=" + phonenumber + "&password=" + password);
+    public static GetNotificationResp getInfoFromServer(String token, String index, String count) throws IOException {
+        URL url = new URL(Constant.Get_Notification + "?token=" + token + "&index=" + index + "&count=" + count);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
@@ -31,8 +32,7 @@ public class LogIn {
             String java_string_content = content.toString();
             System.out.println(java_string_content);
             Gson g = new Gson();
-
-            LoginResp rp = g.fromJson(java_string_content, LoginResp.class);
+            GetNotificationResp rp = g.fromJson(java_string_content, GetNotificationResp.class);
             return rp;
         }
         finally {
