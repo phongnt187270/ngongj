@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Constant {
-	public static String SIGN_UP = "https://project-facebook-clone.herokuapp.com/it4788/user/signup";
-	public static String LOG_IN = "http://it4895.herokuapp.com/it4895/login";
+	public static final String SIGN_UP = "";
+	public static String LOG_IN = "https://hust-fb-it4895.herokuapp.com/it4788/login";
 	public static Map<String, String> response_code = new HashMap<>() {{
 		put("1000", "OK");
 		put("9992", "Post is not existed");
@@ -29,8 +29,8 @@ public class Constant {
 		put("1011", "Could not publish this post");
 		put("1012", "Limited access");
 	}};
-	public static String Set_Read_Notification = "http://it4895.herokuapp.com/it4895/set_read_notification";
-	public static String Get_Notification = "http://it4895.herokuapp.com/it4895/get_notification";
-	public static String Get_User_Info = "http://it4895.herokuapp.com/it4895/get_user_info";
-	public static String Set_User_Info = "http://it4895.herokuapp.com/it4895/set_user_info";
+	public static String Set_Read_Notification = "https://hust-fb-it4895.herokuapp.com/it4788/set_read_notification";
+	public static String Get_Notification = "https://hust-fb-it4895.herokuapp.com/it4788/get_notification";
+	public static String Get_User_Info = "https://hust-fb-it4895.herokuapp.com/it4788/get_user_info";
+	public static String Set_User_Info = "https://hust-fb-it4895.herokuapp.com/it4788/set_user_info";
 }

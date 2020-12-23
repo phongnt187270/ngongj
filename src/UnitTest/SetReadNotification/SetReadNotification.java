@@ -17,12 +17,12 @@ public class SetReadNotification {
     public static void main(String[] args) {
         try {
             case1();
-            case2();
-            case3();
-            case4();
-            case5();
-            case6();
-            case7();
+//            case2();
+//            case3();
+//            case4();
+//            case5();
+//            case6();
+//            case7();
         }
         catch (Exception e) {
             System.out.println("Can not run");
@@ -46,8 +46,7 @@ public class SetReadNotification {
             String java_string_content = content.toString();
             System.out.println(java_string_content);
             Gson g = new Gson();
-            SetReadNotificationResp rp = g.fromJson(java_string_content, SetReadNotificationResp.class);
-            return rp;
+            return g.fromJson(java_string_content, SetReadNotificationResp.class);
         }
         finally {
             connection.disconnect();
@@ -55,9 +54,9 @@ public class SetReadNotification {
     }
     public static void case1() throws IOException {
         System.out.println("Case 1: Success");
-        LoginResp loginResp = LogIn.getInfoFromServer("", "");
+        LoginResp loginResp = LogIn.getInfoFromServer("0583776786", "123456");
         String token = loginResp.data.token;
-        GetNotificationResp getNotificationResp = GetNotification.getInfoFromServer(token, "", "");
+        GetNotificationResp getNotificationResp = GetNotification.getInfoFromServer(token, "20", "1");
         String notification_id = getNotificationResp.data.notification_id;
         SetReadNotificationResp setReadNotificationResp = getInfoFromServer(token, notification_id);
         try {
@@ -71,7 +70,7 @@ public class SetReadNotification {
     }
     public static void case2() throws IOException {
         System.out.println("Case 2: Invalid token");
-        SetReadNotificationResp setReadNotificationResp = getInfoFromServer("", "");
+        SetReadNotificationResp setReadNotificationResp = getInfoFromServer("abc", "");
         try {
             assert "9998".equals(setReadNotificationResp.code) : "Fail";
             System.out.println("Invalid token");
@@ -106,10 +105,6 @@ public class SetReadNotification {
         catch (AssertionError e) {
             e.printStackTrace();
         }
-//        String token = loginResp.data.token;
-//        GetNotificationResp getNotificationResp = GetNotification.getInfoFromServer(token, "", "");
-//        String notification_id = getNotificationResp.data.notification_id;
-//        SetReadNotificationResp setReadNotificationResp = getInfoFromServer(token, notification_id);
 
     }
     public static void case5() throws IOException {
@@ -147,8 +142,7 @@ public class SetReadNotification {
         LoginResp loginResp = LogIn.getInfoFromServer("", "");
         String token = loginResp.data.token;
         GetNotificationResp getNotificationResp = GetNotification.getInfoFromServer(token, "", "");
-//        String notification_id = getNotificationResp.data.notification_id;
-//        SetReadNotificationResp setReadNotificationResp = getInfoFromServer(token, notification_id);
+
         try {
             assert "1".equals(getNotificationResp.data.read) : "Fail";
             System.out.println("This notification has been read");

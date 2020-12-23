@@ -32,11 +32,98 @@ public class LogIn {
             System.out.println(java_string_content);
             Gson g = new Gson();
 
-            LoginResp rp = g.fromJson(java_string_content, LoginResp.class);
-            return rp;
+            return g.fromJson(java_string_content, LoginResp.class);
         }
         finally {
             connection.disconnect();
         }
     }
+    public static void case1() throws IOException {
+        System.out.println("Case 1: Success");
+        LoginResp loginResp = getInfoFromServer("0968823005", "abcdef");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("Success");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+    public static void case2() throws IOException {
+        System.out.println("Case 2: Phone number has not signed up");
+        LoginResp loginResp = getInfoFromServer("0968823007", "abcdef");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("Success");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+    public static void case3() throws IOException {
+        System.out.println("Case 3: Invalid phone number");
+        LoginResp loginResp = getInfoFromServer("968823005", "abcdef");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("Invalid phone number");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+    public static void case4() throws IOException {
+        System.out.println("Case 4: Invalid password");
+        LoginResp loginResp = getInfoFromServer("0968823005", "a");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("Wrong password");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+    public static void case5() throws IOException {
+        System.out.println("Case 5: Phone number and password is null");
+        LoginResp loginResp = getInfoFromServer("", "");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("You have not enter phone number and password");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+    public static void case6() throws IOException {
+        System.out.println("Case 1: Success");
+        LoginResp loginResp = getInfoFromServer("0968823005", "abcdef");
+//        try {
+//            assert "1000".equals(loginResp.code) : "Fail";
+//            System.out.println("Success");
+//        }
+//        catch (AssertionError e) {
+//            e.printStackTrace();
+//        }
+    }
+    public static void case7() throws IOException {
+        System.out.println("Case 7: Phone number and password are the same");
+        LoginResp loginResp = getInfoFromServer("0968823005", "0968823006");
+        try {
+            assert "1000".equals(loginResp.code) : "Fail";
+            System.out.println("Success");
+        }
+        catch (AssertionError e) {
+            e.printStackTrace();
+        }
+    }
+//    public static void case8() throws IOException {
+//        System.out.println("Case 1: Success");
+//        LoginResp loginResp = getInfoFromServer("0968823005", "abcdef");
+//        try {
+//            assert "1000".equals(loginResp.code) : "Fail";
+//            System.out.println("Success");
+//        }
+//        catch (AssertionError e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

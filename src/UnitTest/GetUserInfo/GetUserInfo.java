@@ -14,15 +14,15 @@ public class GetUserInfo {
     public static void main(String[] args)  {
         try {
             case1();
-            case2();
-            case3();
-            case4();
-            case5();
-            case6();
-            case7();
-            case8();
-            case9();
-            case10();
+//            case2();
+//            case3();
+//            case4();
+//            case5();
+//            case6();
+//            case7();
+//            case8();
+//            case9();
+//            case10();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,7 +55,7 @@ public class GetUserInfo {
         System.out.println("Case 1: Success");
         LoginResp loginResp = LogIn.getInfoFromServer("0968823005", "abcdef");
         String token = loginResp.data.token;
-        String user_id = "63";
+        String user_id = "15";
         GetUserInfoResp getUserInfoResp = getInfoFromServer(token, user_id);
         try {
             assert "1000".equals(getUserInfoResp.code) : "Fail";
@@ -134,7 +134,7 @@ public class GetUserInfo {
         System.out.println("Case 7: Be blocked by user");
         LoginResp loginResp = LogIn.getInfoFromServer("0968823005", "abcdef");
         String token = loginResp.data.token;
-        String user_id = "115";
+        String user_id = "16";
         GetUserInfoResp getUserInfoResp = getInfoFromServer(token, user_id);
         System.out.println("You are blocked by this user");
     }

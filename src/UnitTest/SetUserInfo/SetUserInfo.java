@@ -12,24 +12,26 @@ import java.io.IOException;
 public class SetUserInfo {
     public static void main(String[] args) throws IOException {
             case1();
-            case2();
-            case3();
-            case4();
-            case5();
-            case6();
-            case7();
-            case8();
-            case9();
-            case10();
-            case11();
+//            case2();
+//            case3();
+//            case4();
+//            case5();
+//            case6();
+//            case7();
+//            case8();
+//            case9();
+//            case10();
+//            case11();
     }
     public static SetUserInfoResp getInfoFromServer(String token, String username, String description, String address, String city,
                                                     String country, String link, String avatar, String cover_image) throws IOException {
         String requestURL = Constant.Set_User_Info + "?token=" + token
-                + "&username=" + username + "&description="
-                + description + "&address="
-                + address + "&city=" + city + "&country="
-                + country + "&link=" + link;
+                + "&username=" + username
+                //+ "&description="
+                //+ description + "&address="
+                //+ address + "&city=" + city + "&country="
+                //+ country + "&link=" + link
+        ;
         String charset = "UTF-8";
         FileUploader uploader = new FileUploader(requestURL, charset);
         if (!avatar.isEmpty()) {
@@ -48,9 +50,11 @@ public class SetUserInfo {
         System.out.println("Case 1: Success");
         LoginResp loginResp = LogIn.getInfoFromServer("0968823005", "abcdef");
         String token = loginResp.data.token;
-        SetUserInfoResp setUserInfoResp = getInfoFromServer(token, "NamNgo1", "Main",
-                "LinhDam", "HaNoi", "VietNam", "https://www.facebook.com/profile.php?id=100015232384578",
-                "C:/Users/NamNgo/Pictures/ITer.jpg", "C:/Users/NamNgo/Pictures/frontFace.jpg");
+        SetUserInfoResp setUserInfoResp = getInfoFromServer(token, "NamNgo1", "",
+                "", "", "", "",
+                "", ""
+                //"C:/Users/NamNgo/Pictures/frontFace.jpg"
+        );
         try {
             assert "1000".equals(setUserInfoResp.code) : "Fail";
             System.out.println("Success");

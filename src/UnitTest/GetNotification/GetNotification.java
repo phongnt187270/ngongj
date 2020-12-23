@@ -1,7 +1,6 @@
 package UnitTest.GetNotification;
 
 import UnitTest.Constant;
-import UnitTest.SetReadNotification.SetReadNotificationResp;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -32,8 +31,7 @@ public class GetNotification {
             String java_string_content = content.toString();
             System.out.println(java_string_content);
             Gson g = new Gson();
-            GetNotificationResp rp = g.fromJson(java_string_content, GetNotificationResp.class);
-            return rp;
+            return g.fromJson(java_string_content, GetNotificationResp.class);
         }
         finally {
             connection.disconnect();

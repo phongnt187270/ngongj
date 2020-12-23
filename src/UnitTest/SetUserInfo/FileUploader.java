@@ -10,12 +10,10 @@ import java.net.URLConnection;
 public class FileUploader {
     private final String boundary;
     private static final String LINE_FEED = "\r\n";
-    private HttpURLConnection connection;
-    private String charset;
-    private OutputStream outputStream;
-    private PrintWriter writer;
+    private final HttpURLConnection connection;
+    private final OutputStream outputStream;
+    private final PrintWriter writer;
     public FileUploader(String requestURL, String charset) throws IOException {
-        this.charset = charset;
         boundary = "===" + System.currentTimeMillis() + "===";
         URL url = new URL(requestURL);
         connection = (HttpURLConnection) url.openConnection();
@@ -28,11 +26,10 @@ public class FileUploader {
     }
     public void addFilePath(String fieldName, File uploadFile) throws IOException {
         String fileName = uploadFile.getName();
-        writer.append("--" + boundary).append(LINE_FEED);
-        writer.append("Content-Disposition: form-data; name=\""
-                + fieldName + "\"; filename=\"" + fileName + "\"")
+        writer.append("--").append(boundary).append(LINE_FEED);
+        writer.append("Content-Disposition: form-data; name=\"").append(fieldName).append("\"; filename=\"").append(fileName).append("\"")
                 .append(LINE_FEED);
-        writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(fileName))
+        writer.append("Content-Type: ").append(URLConnection.guessContentTypeFromName(fileName))
                 .append(LINE_FEED);
         writer.append("Content-Transfer-Encoding: binary").append(LINE_FEED);
         writer.append(LINE_FEED);
@@ -52,7 +49,7 @@ public class FileUploader {
     }
     public SetUserInfoResp finish() throws IOException {
         writer.append(LINE_FEED).flush();
-        writer.append("--" + boundary + "--").append(LINE_FEED);
+        writer.append("--").append(boundary).append("--").append(LINE_FEED);
         writer.close();
         StringBuilder content;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -66,7 +63,6 @@ public class FileUploader {
         String java_string_content = content.toString();
         System.out.println(java_string_content);
         Gson g = new Gson();
-        SetUserInfoResp rp = g.fromJson(java_string_content, SetUserInfoResp.class);
-        return rp;
+        return g.fromJson(java_string_content, SetUserInfoResp.class);
     }
 }
